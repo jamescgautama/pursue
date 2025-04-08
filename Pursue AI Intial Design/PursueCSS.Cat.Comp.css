@@ -1,0 +1,530 @@
+/* Pursue.style.css */
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #4c2882;
+    color: #ffffff;
+    display: flex;
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 240px;
+    background-color: #331a5e;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    z-index: 10;
+    overflow-y: auto;
+}
+
+.logo-container {
+    width: 100%;
+    min-height: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.logo-image {
+    display: block;
+    max-width: 80%;
+    max-height: auto;
+    object-fit: contain;
+}
+
+.sidebar .navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.sidebar .navigation a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.sidebar .navigation a:hover {
+    text-decoration: underline;
+}
+
+.sidebar .navigation a.active strong {
+    font-weight: bold;
+}
+
+.category-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.category-dropdown-button {
+    background: none;
+    color: #ffffff;
+    border: none;
+    padding: 10px 0;
+    font-size: 1em;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    display: none;
+}
+
+.category-dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #331a5e;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.category-dropdown-content a {
+    color: #ffffff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 1em;
+}
+
+.category-dropdown-content a:hover {
+    background-color: #4c2882;
+}
+
+.category-dropdown.open .category-dropdown-content {
+    display: block;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    padding-left: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: padding-left 0.3s ease-in-out;
+}
+
+.main-title {
+    color: #ffffff;
+    font-size: 2.2em;
+    margin-bottom: 40px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Main Page Styles */
+.main-page .category-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    width: 100%;
+    max-width: 960px;
+    justify-content: center;
+}
+
+.main-page .category-box {
+    background-color: #6a3ab0;
+    color: #ffffff;
+    width: calc(33.33% - 50px / 3);
+    margin-bottom: 25px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    box-sizing: border-box;
+    border: 2px solid #6a3ab0;
+}
+
+.main-page .category-box:hover {
+    transform: scale(1.03);
+    border-color: #8c52ff;
+}
+
+.main-page .category-image-placeholder {
+    background-color: #553388;
+    width: 70%;
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.main-page .category-title {
+    margin-top: 10px;
+}
+
+/* Category Page Styles */
+.category-page .category-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 960px;
+    padding-bottom: 60px;
+}
+
+.category-page .job-box {
+    background-color: #6a3ab0;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out, border 0.3s ease-in-out;
+    border: 2px solid #6a3ab0;
+    box-sizing: border-box;
+}
+
+.category-page .job-box:hover {
+    transform: scale(1.03);
+    border-color: #8c52ff;
+}
+
+.category-page .job-box h2.company-name {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 3px;
+    font-weight: bold;
+}
+
+.category-page .job-box h3.job-title {
+    font-size: 0.9em;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+
+.category-page .job-box p.company-description {
+    font-size: 0.8em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+}
+
+.category-page .job-box p.date-posted {
+    font-size: 0.7em;
+    margin-top: 8px;
+    margin-bottom: 0;
+    color: #ddd;
+}
+
+.category-page .pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.category-page .pagination-label {
+    font-size: 0.9em;
+    color: #ffffff;
+}
+
+.category-page .page-number {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    border: 1px solid #ffffff;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.category-page .page-number:hover {
+    background-color: #ffffff;
+    color: #4c2882;
+}
+
+.category-page .page-number.current {
+    background-color: #ffffff;
+    color: #4c2882;
+}
+
+/* Details Page Styles */
+.details-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+}
+
+.details-page .company-info-box {
+    background-color: #6a3ab0;
+    border-radius: 8px;
+    padding: 30px;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.details-page .company-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.details-page .company-picture {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Example aspect ratio - adjust as needed */
+    background-color: #ddd; /* Placeholder background if no image */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden; /* Clip the image to the rounded corners */
+}
+
+.details-page .company-picture img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire area without stretching */
+}
+
+.details-page .company-name {
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.details-page .posted-date {
+    font-size: 0.9em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.details-page .company-description {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #ffffff;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.details-page .job-details {
+    width: 100%;
+}
+
+.details-page .job-title {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.details-page .job-description {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 30px;
+    color: #ffffff;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+.details-page .contact-info {
+    background-color: #4c2882;
+    padding: 20px;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.details-page .contact-info h3 {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.details-page .contact-info p {
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        overflow-y: visible;
+    }
+
+    .logo-container {
+        min-width: 80px;
+        min-height: 40px;
+        margin-bottom: 0;
+    }
+
+    .logo-image {
+        max-width: 70%;
+    }
+
+    .sidebar .navigation {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .sidebar .navigation a {
+        display: none;
+    }
+
+    .category-dropdown-button {
+        display: block;
+    }
+
+    .main-content {
+        padding-left: 15px;
+        align-items: stretch;
+    }
+
+    .main-page .category-grid {
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    .main-page .category-box {
+        width: 100%;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .category-page .category-grid {
+        grid-template-columns: 1fr;
+        padding-bottom: 80px;
+        gap: 15px;
+    }
+
+    .category-page .job-box {
+        padding: 12px;
+    }
+
+    .category-page .job-box h2.company-name {
+        font-size: 1em;
+    }
+
+    .category-page .job-box h3.job-title {
+        font-size: 0.8em;
+    }
+
+    .category-page .job-box p.company-description {
+        font-size: 0.7em;
+        margin-bottom: 8px;
+    }
+
+    .category-page .pagination {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        justify-content: center;
+        padding: 10px 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        margin-top: 0;
+    }
+
+    .category-page .pagination-label,
+    .category-page .page-number {
+        font-size: 0.8em;
+    }
+
+    .details-page {
+        align-items: stretch;
+        padding-bottom: 20px;
+    }
+
+    .details-page .company-info-box {
+        margin-top: 15px;
+        padding: 20px;
+    }
+
+    .details-page .company-info{
+        align-items: flex-start;
+    }
+
+    .details-page .company-picture{
+        width: 90%;
+        height: auto; /* Let height adjust based on aspect ratio */
+        aspect-ratio: 16 / 9; /* Maintain aspect ratio */
+        margin-bottom: 15px;
+    }
+}
+
+/* Smallest Screen Adjustments */
+@media (max-width: 480px) {
+    .sidebar .navigation {
+        gap: 8px;
+    }
+
+    .sidebar .navigation a,
+    .category-dropdown-button {
+        font-size: 0.9em;
+    }
+
+    .category-page .job-box h2.company-name {
+        font-size: 0.9em;
+    }
+
+    .category-page .job-box h3.job-title {
+        font-size: 0.7em;
+    }
+
+    .category-page .pagination {
+        gap: 5px;
+    }
+
+    .details-page .company-picture{
+        aspect-ratio: 1 / 1; /* Example for very small screens */
+    }
+
+    .details-page .company-info-box {
+        padding: 15px;
+    }
+}
+
+
