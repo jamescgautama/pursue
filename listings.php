@@ -2,7 +2,6 @@
 session_start();
 require_once 'includes/dbh.php'; // Make sure this returns a MySQLi OOP connection $conn
 
-// Fetch user profile picture if logged in
 $profile_picture = 'images/resources/default.jpg'; // Default fallback
 $is_logged_in = false; // Flag to check if a talent is logged in
 
