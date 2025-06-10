@@ -1,23 +1,17 @@
 <?php
 session_start();
-require_once '../includes/dbh.php'; // Make sure this returns a MySQLi OOP connection $conn
+require_once '../includes/dbh.php';
 
-// Fetch project user profile picture and name for the navbar
-$profile_picture_navbar = 'images/resources/default.jpg'; // Default fallback path relative to applications.php
-$navbar_project_name = 'Project'; // Default name for navbar
-
-// IMPORTANT: ALL PHP LOGIC THAT MIGHT SEND HEADERS (LIKE REDIRECTS) MUST BE HERE
-// BEFORE ANY HTML OR BLANK LINES
+$profile_picture_navbar = 'images/resources/default.jpg';
+$navbar_project_name = 'Project';
 
 if (!isset($_SESSION['project_id'])) {
-    // If not logged in, redirect to login.php
     header("Location: ../projects/login.php");
-    exit(); // Always call exit() after header() to prevent further script execution
+    exit();
 }
 
-// Now that we are sure the user is logged in, fetch their project details
 $project_id = $_SESSION['project_id'];
-$profile_sql = "SELECT profile_picture, project_name FROM project_profiles WHERE project_id = ?"; // Added project_name
+$profile_sql = "SELECT profile_picture, project_name FROM project_profiles WHERE project_id = ?";
 $profile_stmt = $conn->prepare($profile_sql);
 $profile_stmt->bind_param("i", $project_id);
 $profile_stmt->execute();
@@ -26,16 +20,12 @@ $profile_result = $profile_stmt->get_result();
 if ($profile_result && $profile_result->num_rows > 0) {
     $profile_row = $profile_result->fetch_assoc();
     if (!empty($profile_row['profile_picture'])) {
-        // Adjust path for profile picture, remove '../' if it's already in the correct web-accessible path
         $profile_picture_navbar = str_replace('../', '', $profile_row['profile_picture']);
     }
-    $navbar_project_name = ($profile_row['project_name']); // Set for navbar alt text
+    $navbar_project_name = ($profile_row['project_name']);
 }
 $profile_stmt->close();
 
-// Close connection if no other database operations will occur,
-// but for a dynamic page, often kept open until end of script or managed by a persistent connection.
-// $conn->close(); // Consider if you want to close it here or at the very end of the file.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -367,7 +357,6 @@ $profile_stmt->close();
 
     <div class="row" id="listings-grid">
     <?php
-        // Fetch listings belonging to the logged-in project_id
         $sql = "SELECT listing_id, job_title, description, location, salary, job_type, category, slug, date_posted
                 FROM listings
                 WHERE project_id = ?
@@ -393,7 +382,6 @@ $profile_stmt->close();
 
                     $truncated_description = substr($description, 0, 150) . (strlen($description) > 150 ? '...' : '');
 
-                    // CORRECTED SLUG LOGIC: Generate clean URL path similar to the second script
                     $listing_detail_url = "../listings/" . $slug;
                     ?>
                     <div class="col-md-6 col-xl-4 mb-4">
@@ -436,21 +424,12 @@ $profile_stmt->close();
             echo '<div class="col-12"><p class="text-danger">Error preparing database statement for listings.</p></div>';
             error_log("listings.php: Prepare statement failed: " . $conn->error);
         }
-        // It's usually good practice to close the connection once all database operations are done
-        // Or if you have a mechanism that handles it at the end of the script lifecycle.
         $conn->close(); 
     ?>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Initialize Bootstrap Toasts (if you implement any toast notifications here)
-    // var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-    // var toastList = toastElList.map(function (toastEl) {
-    //     return new bootstrap.Toast(toastEl)
-    // })
-    // toastList.forEach(toast => toast.show())
-</script>
+
 </body>
 </html>
