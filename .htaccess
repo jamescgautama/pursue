@@ -1,0 +1,16 @@
+RewriteEngine On
+
+RewriteRule ^listings/([a-z0-9-]+)$ includes/listingdetail.php?slug=$1 [L,QSA]
+RewriteRule ^discover/([a-zA-Z0-9-]+)$ includes/projectdetail.php?slug=$1 [L,QSA]
+RewriteRule ^projects/discover/([a-zA-Z0-9-]+)$ includes/talentdetail.php?slug=$1 [L,QSA]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# Documentation:
+# These are rewrite rules for the URL. First part is for the slugs to make Listings and Projects look nicer
+# The second part is for the file extension. The logic is simple: if there's no directory and no other non-PHP
+# file called that, then remove .php from the end.
